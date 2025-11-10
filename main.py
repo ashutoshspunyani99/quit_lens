@@ -24,8 +24,8 @@ with gr.Blocks(title="QuitLens") as app:
 
 if __name__ == "__main__":
     app.launch(
-        server_name="localhost",
+        server_name="0.0.0.0",
         server_port=int(os.getenv("PORT", 3000)),
         show_error=True,
-        share=True
+        share=False,
     )
