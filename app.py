@@ -160,13 +160,15 @@ def simulate_effect(image, scenario, age, gender, habits):
 # ---------------------------------------------------------
 # 4️⃣ Build the Gradio UI
 # ---------------------------------------------------------
-ui = gr.Interface(
+with gr.Blocks() as app_ui:
+    gr.Markdown("### QuitLens: Oral Health Visualizer")
+    gr.Interface(
     fn=simulate_effect,
     inputs=[
         gr.Image(label="Upload or Capture Mouth Image", sources=["upload", "webcam"]),
-        gr.Radio(["Continue smoking", "Quit smoking"], label="Simulation Type"),
+        gr.Radio(["Continue smoking", "Quit smoking"],value="Continue smoking", label="Simulation Type"),
         gr.Textbox(label="Age (optional)"),
-        gr.Dropdown(["Male", "Female", "Other"], label="Gender (optional)"),
+        gr.Dropdown(["Male", "Female", "Other"], value="Male", label="Gender (optional)"),
         gr.Textbox(label="Smoking habits (duration/frequency)")
     ],
     outputs=[
@@ -174,17 +176,17 @@ ui = gr.Interface(
         gr.Image(type="pil", label="Simulated Mouth Result")
     ],
     title="QuitLens: Oral Health Visualizer",
-    description="Visualize oral health outcomes — continue vs quit smoking using Gemini 2.5 Flash Image model."
-)
+    description="Visualize oral health outcomes — continue vs quit smoking using Gemini 2.5 Flash Image model.",
+    ).queue()
 
 
 # Add post-processing hook
 # ---------------------------------------------------------
 # 5️⃣ Launch app
 # ---------------------------------------------------------
-if __name__ == "__main__":
-    try:
-        print("Launching QuitLens app...")
-        ui.launch()
-    except Exception as e:
-        print(f"Error launching app: {str(e)}")
+# if __name__ == "__main__":
+#     try:
+#         print("Launching QuitLens app...")
+#         app_ui.launch()
+#     except Exception as e:
+#         print(f"Error launching app: {str(e)}")

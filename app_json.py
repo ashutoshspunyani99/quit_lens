@@ -49,13 +49,16 @@ def load_image():
 
 
 # Gradio UI
-app = gr.Interface(
-    fn=load_image,
-    inputs=None,     # No upload
-    outputs=gr.Image(type="pil", label="Extracted Image"),
-    title="Gemini Image Viewer",
-    description="Automatically displays the image stored in gemini_response.json in this folder."
-)
+with gr.Blocks() as json_ui:
+    gr.Markdown("## Gemini Image Viewer")
 
-if __name__ == "__main__":
-    app.launch()
+    gr.Interface(
+        fn=load_image,
+        inputs=None,     # No upload
+        outputs=gr.Image(type="pil", label="Extracted Image"),
+        title="Gemini Image Viewer",
+        description="Automatically displays the image stored in gemini_response.json in this folder."
+    ).queue()
+
+# if __name__ == "__main__":
+#     json_app.launch()
