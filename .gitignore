@@ -1,0 +1,5 @@
+.env
+venv/
+.gradio/
+gemini_response.json
+run.sh
