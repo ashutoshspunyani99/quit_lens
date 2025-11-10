@@ -3,3 +3,4 @@ venv/
 .gradio/
 gemini_response.json
 run.sh
+__pycache__/
